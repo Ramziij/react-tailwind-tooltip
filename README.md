@@ -14,15 +14,15 @@ React tailwind tooltip is a React component for creating customizable tooltips u
 
 Install with npm:
 
-`npm install react_tailwind_tooltip`
+`npm install react-tailwind-tooltip`
 
 Install with yarn:
 
-`yarn add react_tailwind_tooltip`
+`yarn add react-tailwind-tooltip`
 
 Install with pnpm:
 
-`pnpm add react_tailwind_tooltip`
+`pnpm add react-tailwind-tooltip`
 
 ## License
 
@@ -36,7 +36,7 @@ For more information, issues, and contributions, visit the [GitHub repository](h
 
 ```tsx
 import React from 'react';
-import { Tooltip } from 'react_tailwind_tooltip';
+import { Tooltip } from 'react-tailwind-tooltip';
 
 const App = () => {
   return (
