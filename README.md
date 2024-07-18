@@ -12,8 +12,6 @@ React tailwind tooltip is a React component for creating customizable tooltips u
 
 ## Installation:
 
-[![NPM](https://nodei.co/npm/@autosys/react-mui-keyboard.png?downloads=true&stars=true)](https://www.npmjs.com/package/@autosys/react-mui-keyboard)
-
 Install with npm:
 
 `npm install react_tailwind_tooltip`
