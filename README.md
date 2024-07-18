@@ -34,6 +34,8 @@ For more information, issues, and contributions, visit the [GitHub repository](h
 
 ## Example Usage:
 
+![Example](./images/example.png)
+
 ```tsx
 import React from 'react';
 import { Tooltip } from 'react-tailwind-tooltip';
