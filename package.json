@@ -1,0 +1,62 @@
+{
+  "name": "react_tailwind_tooltip",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ramziij/react_tailwind_tooltip.git"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "KirillRamzaev",
+    "email": "kerah304@gmail.com",
+    "url": "https://github.com/Ramziij"
+  },
+  "scripts": {
+    "clean": "rm -rf dist/",
+    "build": "pnpm clean && pnpm build:esm && pnpm build:cjs && pnpm build:css",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module commonjs --outDir dist/cjs",
+    "build:css": "tailwindcss -o dist/esm/index.css --minify && tailwindcss -o dist/cjs/index.css --minify",
+    "prepare": "pnpm build"
+  },
+  "peerDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "keywords": [
+    "react",
+    "typescript",
+    "tailwind",
+    "tooltip",
+    "react-tooltip",
+    "tailwind-tooltip",
+    "daisyui"
+  ],
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "autoprefixer": "^9.8.6",
+    "daisyui": "^4.12.10",
+    "postcss": "^8.4.39",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwindcss": "^3.4.4",
+    "tslib": "^2.6.3",
+    "typescript": "^4.9.5",
+    "web-vitals": "^2.1.4"
+  }
+}

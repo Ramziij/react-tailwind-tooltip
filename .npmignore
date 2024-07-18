@@ -1,0 +1,18 @@
+# dependencies
+/node_modules
+
+#ignores
+.gitignore
+.npmignore
+
+#configs
+.prettierrc
+tsconfig.json
+.git
+.npmrc
+
+# misc
+.DS_Store
+
+#Errors
+yarn-error.log*
