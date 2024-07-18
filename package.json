@@ -1,5 +1,5 @@
 {
-  "name": "react_tailwind_tooltip",
+  "name": "react-tailwind-tooltip",
   "version": "1.0.0",
   "repository": {
     "type": "git",
@@ -16,7 +16,7 @@
     "build": "pnpm clean && pnpm build:esm && pnpm build:cjs && pnpm build:css",
     "build:esm": "tsc",
     "build:cjs": "tsc --module commonjs --outDir dist/cjs",
-    "build:css": "tailwindcss -o dist/esm/index.css --minify && tailwindcss -o dist/cjs/index.css --minify",
+    "build:css": "tailwindcss -o dist/index.css --minify",
     "prepare": "pnpm build"
   },
   "peerDependencies": {
@@ -58,5 +58,8 @@
     "tslib": "^2.6.3",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
-  }
+  },
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts"
 }

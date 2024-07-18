@@ -51,6 +51,8 @@ const App = () => {
 export default App;
 ```
 
+You can also insert styles - `import 'react-tailwind-tooltip/dist/index.css'`
+
 ### Properties
 
 | Name            | Type                                                            | Description                                                          |
