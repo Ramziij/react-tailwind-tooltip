@@ -3,7 +3,7 @@ import { Portal } from '../Portal';
 
 interface TooltipProps {
   children: React.ReactNode;
-  title: string;
+  title: React.ReactNode;
   placement?: 'top' | 'bottom' | 'left' | 'right';
   followCursor?: boolean;
   arrow?: boolean;
