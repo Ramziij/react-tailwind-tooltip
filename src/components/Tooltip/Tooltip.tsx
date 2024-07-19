@@ -8,6 +8,8 @@ interface TooltipProps {
   followCursor?: boolean;
   arrow?: boolean;
   open?: boolean;
+  tooltipStyle?: string;
+  arrowStyle?: string;
   onOpen?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   onClose?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
@@ -19,6 +21,8 @@ export const Tooltip: React.FC<TooltipProps> = ({
   followCursor = false,
   arrow = false,
   open: openProp,
+  tooltipStyle = 'bg-[#223354]/95 text-white text-sm',
+  arrowStyle = 'to-[#223354]/95',
   onOpen,
   onClose,
 }) => {
@@ -153,7 +157,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
       {open && (
         <Portal>
           <div
-            className="fixed z-10 p-2 bg-[#223354]/95 text-white text-sm rounded-lg shadow-lg"
+            className={`fixed z-10 p-2 ${tooltipStyle} rounded-lg shadow-lg`}
             style={{ top: `${tooltipPosition.top}px`, left: `${tooltipPosition.left}px` }}
             ref={tooltipRef}
             onMouseEnter={handleTooltipMouseEnter}
@@ -162,7 +166,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
             {title}
             {arrow && (
               <div
-                className={`absolute w-2 h-2 to-[#223354]/95 to-50% transform rotate-45 ${
+                className={`absolute w-2 h-2 ${arrowStyle} to-50% transform rotate-45 ${
                   currentPlacement === 'top'
                     ? 'bottom-[-4px] left-1/2 -translate-x-1/2 bg-gradient-to-br from-transparent from-50%'
                     : currentPlacement === 'bottom'

@@ -67,6 +67,8 @@ You can also insert styles - `import 'react-tailwind-tooltip/dist/index.css'`
 | `followCursor*` | `boolean`                                                       | Whether the tooltip should follow the cursor. Default `false`        |
 | `arrow*`        | `boolean`                                                       | Whether to display an arrow pointing to the element. Default `false` |
 | `open*`         | `boolean`                                                       | Control the visibility of the tooltip.                               |
+| `tooltipStyle*` | `string`                                                        | Style of the tooltip. Default `bg-[#223354]/95 text-white text-sm`   |
+| `arrowStyle*`   | `string`                                                        | Style of the arrow. Default `to-[#223354]/95`                        |
 | `onOpen*`       | `(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void` | Callback function triggered when the tooltip opens.                  |
 | `onClose*`      | `(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void` | Callback function triggered when the tooltip closes.                 |
 
