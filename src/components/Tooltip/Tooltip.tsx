@@ -27,6 +27,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
   const [currentPlacement, setCurrentPlacement] = React.useState(placement);
   const tooltipRef = React.useRef<HTMLDivElement>(null);
   const childRef = React.useRef<HTMLDivElement>(null);
+  const isTooltipHovered = React.useRef(false);
 
   const calculatePosition = () => {
     if (childRef.current && tooltipRef.current) {
@@ -100,6 +101,20 @@ export const Tooltip: React.FC<TooltipProps> = ({
   };
 
   const handleMouseLeave = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    setTimeout(() => {
+      if (!isTooltipHovered.current) {
+        setOpen(false);
+        if (onClose) onClose(event);
+      }
+    }, 100);
+  };
+
+  const handleTooltipMouseEnter = () => {
+    isTooltipHovered.current = true;
+  };
+
+  const handleTooltipMouseLeave = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    isTooltipHovered.current = false;
     setOpen(false);
     if (onClose) onClose(event);
   };
@@ -141,6 +156,8 @@ export const Tooltip: React.FC<TooltipProps> = ({
             className="fixed z-10 p-2 bg-[#223354]/95 text-white text-sm rounded-lg shadow-lg"
             style={{ top: `${tooltipPosition.top}px`, left: `${tooltipPosition.left}px` }}
             ref={tooltipRef}
+            onMouseEnter={handleTooltipMouseEnter}
+            onMouseLeave={handleTooltipMouseLeave}
           >
             {title}
             {arrow && (
