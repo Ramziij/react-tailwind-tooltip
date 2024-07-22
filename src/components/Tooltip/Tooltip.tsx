@@ -12,6 +12,8 @@ interface TooltipProps {
   arrowStyle?: string;
   onOpen?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   onClose?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  enterDelay?: number;
+  leaveDelay?: number;
 }
 
 export const Tooltip: React.FC<TooltipProps> = ({
@@ -25,6 +27,8 @@ export const Tooltip: React.FC<TooltipProps> = ({
   arrowStyle = 'to-[#223354]/95',
   onOpen,
   onClose,
+  enterDelay = 100,
+  leaveDelay = 100,
 }) => {
   const [open, setOpen] = React.useState(openProp ? openProp : false);
   const [tooltipPosition, setTooltipPosition] = React.useState({ top: 0, left: 0 });
@@ -32,6 +36,8 @@ export const Tooltip: React.FC<TooltipProps> = ({
   const tooltipRef = React.useRef<HTMLDivElement>(null);
   const childRef = React.useRef<HTMLDivElement>(null);
   const isTooltipHovered = React.useRef(false);
+  const openTimeout = React.useRef<NodeJS.Timeout | null>(null);
+  const closeTimeout = React.useRef<NodeJS.Timeout | null>(null);
 
   const calculatePosition = () => {
     if (childRef.current && tooltipRef.current) {
@@ -100,27 +106,43 @@ export const Tooltip: React.FC<TooltipProps> = ({
   };
 
   const handleMouseOver = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    setOpen(true);
-    if (onOpen) onOpen(event);
+    if (openTimeout.current) {
+      clearTimeout(openTimeout.current);
+    }
+    openTimeout.current = setTimeout(() => {
+      setOpen(true);
+      if (onOpen) onOpen(event);
+    }, enterDelay);
   };
 
   const handleMouseLeave = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    setTimeout(() => {
+    if (openTimeout.current) {
+      clearTimeout(openTimeout.current);
+    }
+    if (closeTimeout.current) {
+      clearTimeout(closeTimeout.current);
+    }
+    closeTimeout.current = setTimeout(() => {
       if (!isTooltipHovered.current) {
         setOpen(false);
         if (onClose) onClose(event);
       }
-    }, 100);
+    }, leaveDelay);
   };
 
   const handleTooltipMouseEnter = () => {
+    if (closeTimeout.current) {
+      clearTimeout(closeTimeout.current);
+    }
     isTooltipHovered.current = true;
   };
 
   const handleTooltipMouseLeave = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     isTooltipHovered.current = false;
-    setOpen(false);
-    if (onClose) onClose(event);
+    closeTimeout.current = setTimeout(() => {
+      setOpen(false);
+      if (onClose) onClose(event);
+    }, leaveDelay);
   };
 
   React.useEffect(() => {
