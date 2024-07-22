@@ -41,7 +41,6 @@ For more information, issues, and contributions, visit the [GitHub repository](h
 ```tsx
 import React from 'react';
 import { Tooltip } from 'react-tailwind-tooltip';
-import 'react-tailwind-tooltip/dist/index.css';
 
 const App = () => {
   return (
@@ -56,7 +55,46 @@ const App = () => {
 export default App;
 ```
 
-### Properties
+### Tailwind Configuration
+
+In your `tailwind.config.(js|ts)`:
+
+```tsx
+module.exports = {
+  content: [
+    './src/**/*.{js,jsx,ts,tsx}',
+    './node_modules/react-tailwind-tooltip/**/*.{ts,tsx,js,jsx}',
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+```
+
+### Monorepo Setup
+
+If you’re working in a monorepo with workspaces, you may need to use require.resolve to ensure Tailwind can see your content files:
+
+In `tailwind.config.(js|ts)`:
+
+```tsx
+const path = require('path');
+
+module.exports = {
+  content: [
+    './components/**/*.{html,js}',
+    './pages/**/*.{html,js}',
+    path.join(path.dirname(require.resolve('react-tailwind-tooltip')), '**/*.{ts,tsx,js,jsx}'),
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+```
+
+## Properties
 
 | Name            | Type                                                            | Description                                                          |
 | --------------- | --------------------------------------------------------------- | -------------------------------------------------------------------- |
