@@ -27,8 +27,8 @@ export const Tooltip: React.FC<TooltipProps> = ({
   arrowStyle = 'to-[#223354]/95',
   onOpen,
   onClose,
-  enterDelay = 100,
-  leaveDelay = 100,
+  enterDelay = 300,
+  leaveDelay = 300,
 }) => {
   const [open, setOpen] = React.useState(openProp ? openProp : false);
   const [tooltipPosition, setTooltipPosition] = React.useState({ top: 0, left: 0 });
