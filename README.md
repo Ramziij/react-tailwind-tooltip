@@ -41,6 +41,7 @@ For more information, issues, and contributions, visit the [GitHub repository](h
 ```tsx
 import React from 'react';
 import { Tooltip } from 'react-tailwind-tooltip';
+import 'react-tailwind-tooltip/dist/index.css';
 
 const App = () => {
   return (
@@ -54,8 +55,6 @@ const App = () => {
 
 export default App;
 ```
-
-You can also insert styles - `import 'react-tailwind-tooltip/dist/index.css'`
 
 ### Properties
 
