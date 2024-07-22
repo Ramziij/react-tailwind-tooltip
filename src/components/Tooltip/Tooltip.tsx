@@ -33,6 +33,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
   const [open, setOpen] = React.useState(openProp ? openProp : false);
   const [tooltipPosition, setTooltipPosition] = React.useState({ top: 0, left: 0 });
   const [currentPlacement, setCurrentPlacement] = React.useState(placement);
+  const [isVisible, setIsVisible] = React.useState(false);
   const tooltipRef = React.useRef<HTMLDivElement>(null);
   const childRef = React.useRef<HTMLDivElement>(null);
   const isTooltipHovered = React.useRef(false);
@@ -111,6 +112,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
     }
     openTimeout.current = setTimeout(() => {
       setOpen(true);
+      setIsVisible(true);
       if (onOpen) onOpen(event);
     }, enterDelay);
   };
@@ -124,8 +126,11 @@ export const Tooltip: React.FC<TooltipProps> = ({
     }
     closeTimeout.current = setTimeout(() => {
       if (!isTooltipHovered.current) {
-        setOpen(false);
-        if (onClose) onClose(event);
+        setIsVisible(false);
+        setTimeout(() => {
+          setOpen(false);
+          if (onClose) onClose(event);
+        }, 300);
       }
     }, leaveDelay);
   };
@@ -140,8 +145,11 @@ export const Tooltip: React.FC<TooltipProps> = ({
   const handleTooltipMouseLeave = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     isTooltipHovered.current = false;
     closeTimeout.current = setTimeout(() => {
-      setOpen(false);
-      if (onClose) onClose(event);
+      setIsVisible(false);
+      setTimeout(() => {
+        setOpen(false);
+        if (onClose) onClose(event);
+      }, 300);
     }, leaveDelay);
   };
 
@@ -180,7 +188,13 @@ export const Tooltip: React.FC<TooltipProps> = ({
         <Portal>
           <div
             className={`fixed z-10 p-2 ${tooltipStyle} rounded-lg shadow-lg`}
-            style={{ top: `${tooltipPosition.top}px`, left: `${tooltipPosition.left}px` }}
+            style={{
+              top: `${tooltipPosition.top}px`,
+              left: `${tooltipPosition.left}px`,
+              transition: 'opacity 0.3s ease, transform 0.3s ease',
+              opacity: isVisible ? 1 : 0,
+              transform: isVisible ? 'scale(1)' : 'scale(0.95)',
+            }}
             ref={tooltipRef}
             onMouseEnter={handleTooltipMouseEnter}
             onMouseLeave={handleTooltipMouseLeave}
