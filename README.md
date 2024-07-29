@@ -34,6 +34,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 For more information, issues, and contributions, visit the [GitHub repository](https://github.com/Ramziij/react_tailwind_tooltip).
 
+## Preview
+
+Open this example in [StackBlitz](https://stackblitz.com):
+
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/fork/github.com/Ramziij/react-tailwind-tooltip/tree/main/example?title=react-tailwind-tooltip-example&file=src/App.tsx)
+
 ## Example Usage:
 
 ![Example](./images/example.png)
