@@ -3,7 +3,7 @@ import { Tooltip } from 'react-tailwind-tooltip';
 function App() {
   return (
     <div className="flex flex-row items-center p-10 h-[400px] w-[350px]">
-      <div className="flex flex-col justify-between items-center h-full ml-10">
+      <div className="flex flex-col justify-between items-center h-full w-full ml-10">
         <Tooltip title="Tooltip on bottom" placement="bottom" arrow>
           <button className="p-2 bg-blue-500 text-white rounded">Tooltip on bottom</button>
         </Tooltip>
