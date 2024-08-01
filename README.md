@@ -102,19 +102,19 @@ module.exports = {
 
 ## Properties
 
-| Name            | Type                                                            | Description                                                          |
-| --------------- | --------------------------------------------------------------- | -------------------------------------------------------------------- |
-| `children`      | `React.ReactNode`                                               | The element that the tooltip will be attached to.                    |
-| `title`         | `React.ReactNode`                                               | The content of the tooltip.                                          |
-| `placement*`    | `top \| bottom \| left \| right`                                | TThe preferred position of the tooltip. Default `bottom`             |
-| `followCursor*` | `boolean`                                                       | Whether the tooltip should follow the cursor. Default `false`        |
-| `arrow*`        | `boolean`                                                       | Whether to display an arrow pointing to the element. Default `false` |
-| `open*`         | `boolean`                                                       | Control the visibility of the tooltip.                               |
-| `tooltipStyle*` | `string`                                                        | Style of the tooltip. Default `bg-[#223354]/95 text-white text-sm`   |
-| `arrowStyle*`   | `string`                                                        | Style of the arrow. Default `to-[#223354]/95`                        |
-| `enterDelay*`   | `number`                                                        | Delay in milliseconds before the tooltip appears. Default `100`      |
-| `leaveDelay*`   | `number`                                                        | Delay in milliseconds before the tooltip disappears. Default `100`   |
-| `onOpen*`       | `(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void` | Callback function triggered when the tooltip opens.                  |
-| `onClose*`      | `(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void` | Callback function triggered when the tooltip closes.                 |
+| Name            | Type                                                                                                                                         | Description                                                          |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| `children`      | `React.ReactNode`                                                                                                                            | The element that the tooltip will be attached to.                    |
+| `title`         | `React.ReactNode`                                                                                                                            | The content of the tooltip.                                          |
+| `placement*`    | `top \| top-start \| top-end \| bottom \| bottom-start \| bottom-end \| left \| left-start \| left-end \| right \| right-start \| right-end` | TThe preferred position of the tooltip. Default `bottom`             |
+| `followCursor*` | `boolean`                                                                                                                                    | Whether the tooltip should follow the cursor. Default `false`        |
+| `arrow*`        | `boolean`                                                                                                                                    | Whether to display an arrow pointing to the element. Default `false` |
+| `open*`         | `boolean`                                                                                                                                    | Control the visibility of the tooltip.                               |
+| `tooltipStyle*` | `string`                                                                                                                                     | Style of the tooltip. Default `bg-[#223354]/95 text-white text-sm`   |
+| `arrowStyle*`   | `string`                                                                                                                                     | Style of the arrow. Default `to-[#223354]/95`                        |
+| `enterDelay*`   | `number`                                                                                                                                     | Delay in milliseconds before the tooltip appears. Default `100`      |
+| `leaveDelay*`   | `number`                                                                                                                                     | Delay in milliseconds before the tooltip disappears. Default `100`   |
+| `onOpen*`       | `(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void`                                                                              | Callback function triggered when the tooltip opens.                  |
+| `onClose*`      | `(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void`                                                                              | Callback function triggered when the tooltip closes.                 |
 
 Props marked with \* are not required.

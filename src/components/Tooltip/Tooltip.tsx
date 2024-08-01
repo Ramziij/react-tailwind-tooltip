@@ -1,10 +1,24 @@
 import React from 'react';
 import { Portal } from '../Portal';
 
+type TooltipPlacement =
+  | 'top'
+  | 'top-start'
+  | 'top-end'
+  | 'bottom'
+  | 'bottom-start'
+  | 'bottom-end'
+  | 'left'
+  | 'left-start'
+  | 'left-end'
+  | 'right'
+  | 'right-start'
+  | 'right-end';
+
 interface TooltipProps {
   children: React.ReactNode;
   title: React.ReactNode;
-  placement?: 'top' | 'bottom' | 'left' | 'right';
+  placement?: TooltipPlacement;
   followCursor?: boolean;
   arrow?: boolean;
   open?: boolean;
@@ -15,6 +29,21 @@ interface TooltipProps {
   enterDelay?: number;
   leaveDelay?: number;
 }
+
+const getArrowClassName = (placement: string) => {
+  const baseClass = 'absolute w-2 h-2 transform rotate-45 to-50%';
+
+  const direction = placement.split('-')[0];
+
+  const positionClasses: Record<string, string> = {
+    top: 'bottom-[-4px] left-1/2 -translate-x-1/2 bg-gradient-to-br from-transparent from-50%',
+    bottom: 'top-[-4px] left-1/2 -translate-x-1/2 bg-gradient-to-tl from-transparent from-50%',
+    left: 'right-[-4px] top-1/2 -translate-y-1/2 bg-gradient-to-tr from-transparent from-50%',
+    right: 'left-[-4px] top-1/2 -translate-y-1/2 bg-gradient-to-bl from-transparent from-50%',
+  };
+
+  return `${baseClass} ${positionClasses[direction]}`;
+};
 
 export const Tooltip: React.FC<TooltipProps> = ({
   children,
@@ -31,7 +60,10 @@ export const Tooltip: React.FC<TooltipProps> = ({
   leaveDelay = 100,
 }) => {
   const [open, setOpen] = React.useState(openProp ? openProp : false);
-  const [tooltipPosition, setTooltipPosition] = React.useState({ top: 0, left: 0 });
+  const [tooltipPosition, setTooltipPosition] = React.useState({
+    top: 0,
+    left: 0,
+  });
   const [currentPlacement, setCurrentPlacement] = React.useState(placement);
   const [isVisible, setIsVisible] = React.useState(false);
   const tooltipRef = React.useRef<HTMLDivElement>(null);
@@ -50,7 +82,20 @@ export const Tooltip: React.FC<TooltipProps> = ({
 
       let newPlacement = currentPlacement;
 
-      const placements = ['top', 'bottom', 'left', 'right'];
+      const placements = [
+        'top',
+        'top-start',
+        'top-end',
+        'bottom',
+        'bottom-start',
+        'bottom-end',
+        'left',
+        'left-start',
+        'left-end',
+        'right',
+        'right-start',
+        'right-end',
+      ];
       const calculateTooltipPosition = (placement: string) => {
         switch (placement) {
           case 'top':
@@ -58,19 +103,59 @@ export const Tooltip: React.FC<TooltipProps> = ({
               top: top - tooltipHeight - 8,
               left: left + width / 2 - tooltipWidth / 2,
             };
+          case 'top-start':
+            return {
+              top: top - tooltipHeight - 8,
+              left: left,
+            };
+          case 'top-end':
+            return {
+              top: top - tooltipHeight - 8,
+              left: left + width - tooltipWidth,
+            };
           case 'bottom':
             return {
               top: top + height + 8,
               left: left + width / 2 - tooltipWidth / 2,
+            };
+          case 'bottom-start':
+            return {
+              top: top + height + 8,
+              left: left,
+            };
+          case 'bottom-end':
+            return {
+              top: top + height + 8,
+              left: left + width - tooltipWidth,
             };
           case 'left':
             return {
               top: top + height / 2 - tooltipHeight / 2,
               left: left - tooltipWidth - 8,
             };
+          case 'left-start':
+            return {
+              top: top,
+              left: left - tooltipWidth - 8,
+            };
+          case 'left-end':
+            return {
+              top: top + height - tooltipHeight,
+              left: left - tooltipWidth - 8,
+            };
           case 'right':
             return {
               top: top + height / 2 - tooltipHeight / 2,
+              left: left + width + 8,
+            };
+          case 'right-start':
+            return {
+              top: top,
+              left: left + width + 8,
+            };
+          case 'right-end':
+            return {
+              top: top + height - tooltipHeight,
               left: left + width + 8,
             };
           default:
@@ -202,15 +287,7 @@ export const Tooltip: React.FC<TooltipProps> = ({
             {title}
             {arrow && (
               <div
-                className={`absolute w-2 h-2 ${arrowStyle} to-50% transform rotate-45 ${
-                  currentPlacement === 'top'
-                    ? 'bottom-[-4px] left-1/2 -translate-x-1/2 bg-gradient-to-br from-transparent from-50%'
-                    : currentPlacement === 'bottom'
-                    ? 'top-[-4px] left-1/2 -translate-x-1/2 bg-gradient-to-tl from-transparent from-50%'
-                    : currentPlacement === 'left'
-                    ? 'right-[-4px] top-1/2 -translate-y-1/2 bg-gradient-to-tr from-transparent from-50%'
-                    : 'left-[-4px] top-1/2 -translate-y-1/2 bg-gradient-to-bl from-transparent from-50%'
-                }`}
+                className={`${arrowStyle} ${getArrowClassName(currentPlacement)}`}
                 style={{ zIndex: -1 }}
               />
             )}
